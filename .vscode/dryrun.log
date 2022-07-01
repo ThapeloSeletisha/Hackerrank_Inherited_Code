@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/thapelo/Documents/Source/Learn/Hackerrank_Inherited_Code'
+make: Leaving directory '/home/thapelo/Documents/Source/Learn/Hackerrank_Inherited_Code'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+

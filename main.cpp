@@ -6,12 +6,22 @@ using namespace std;
 
 class BadLengthException : public exception {
 private:
-    int m_n;
+    char* length;
 public:
-    BadLengthException(int n) : m_n(n){}
+    BadLengthException(int n)
+    {
+        string length_string = to_string(n);
+        length = new char(length_string.size());
+        for (size_t i = 0; i < length_string.size(); i++)
+        {
+            *(length + i) = length_string[i];
+        }
+        // length on hackerrank doesnt end where it should
+        *(length + length_string.size()) = '\0'; // Deals with hackerrank error
+    }
     const char * what() const throw ()
     {
-        return to_string(m_n).c_str();
+        return length;
     }
 };
 
@@ -32,6 +42,17 @@ bool checkUsername(string username) {
     return isValid;
 }
 
+int getSize (const char * s) {
+    const char * t; // first copy the pointer to not change the original
+    int size = 0;
+
+    for (t = s; *t != '\0'; t++) {
+        size++;
+    }
+
+    return size;
+}
+
 int main() {
     int T; cin >> T;
     while(T--) {
@@ -46,7 +67,9 @@ int main() {
             }
         } catch (BadLengthException e) {
             cout << "Too short: " << e.what() << '\n';
+            cout << getSize(e.what()) << endl;
         }
     }
+    // cout << check() << endl;
     return 0;
 }
